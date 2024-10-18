@@ -1,0 +1,23 @@
+{
+  "name": "alphatwelve-e-m-dashboard",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "vite": "^5.4.8"
+  },
+  "dependencies": {
+    "simple-git-hooks": "^2.11.1"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm run format",
+    "preserveUnused": true
+  }
+}
