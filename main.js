@@ -1,76 +1,85 @@
+import toggleMenu from "./utils/toggleMenu.js";
+import toggleTheme from "./utils/toggleTheme.js";
+import Chart from "chart.js/auto";
+
 const toggleMenuBtn = document.querySelector(".toggle-menu");
 const navLinks = document.querySelectorAll(".primary-nav a .nav-link-text");
 const toggleThemeBtn = document.querySelector(".toggle-theme");
 const userProfileCardInfo = document.querySelector(".user-info");
 
-// Toggle menu
-toggleMenuBtn.addEventListener("click", () => {
-  navLinks.forEach((link) => {
-    link.classList.toggle("is-hidden");
-  });
-  toggleMenuBtn.querySelector("span").classList.toggle("is-hidden");
-  toggleThemeBtn
-    .querySelector(".theme-toggle-text")
-    .classList.toggle("is-hidden");
-  userProfileCardInfo.classList.toggle("is-hidden");
+// toggle menu
+toggleMenu(toggleMenuBtn, navLinks, toggleThemeBtn, userProfileCardInfo);
 
-  const isCollapseTextHidden = toggleThemeBtn
-    .querySelector(".theme-toggle-text")
-    .classList.contains("is-hidden");
+// toggle theme
+toggleTheme(toggleThemeBtn);
 
-  toggleMenuBtn.setAttribute(
-    "aria-expanded",
-    isCollapseTextHidden ? "false" : "true",
-  );
+// Event registrations per month's bar chart
+(function eventBarChart() {
+    const ctx = document.getElementById('bar-chart');
 
-  // check if there are notifications
-  const notificationCount = document.querySelector(".new-notification-count");
-  const bellContainer = document.querySelector(".bell-container");
+    const data = [
+        {month: "Jan", count: 770},
+        {month: "Feb", count: 670},
+        {month: "Mar", count: 894},
+        {month: "Apr", count: 499},
+        {month: "May", count: 390},
+        {month: "Jun", count: 859},
+        {month: "Jul", count: 890},
+        {month: "Aug", count: 489},
+        {month: "Sep", count: 799},
+        {month: "Oct", count: 600},
+        {month: "Nov", count: 578},
+        {month: "Dec", count: 990},
+    ]
 
-  const numberOfNotifications = Number(notificationCount.innerText);
-
-  if (
-    numberOfNotifications > 0 &&
-    toggleMenuBtn.getAttribute("aria-expanded") === "false"
-  ) {
-    bellContainer.classList.add("bell-has-notification");
-  } else {
-    bellContainer.classList.remove("bell-has-notification");
-  }
-  //
-});
-//
-
-// Toggle theme
-const currentModeText = toggleThemeBtn.querySelector(".theme-toggle-text");
-const themeToggleBtnBall = toggleThemeBtn.querySelector(
-  ".theme-toggle-ball-container",
-);
-
-// Check user's preference on page load and apply the stored theme if available
-const userPreferredTheme = localStorage.getItem("theme");
-
-if (userPreferredTheme) {
-  document.body.classList.add(userPreferredTheme);
-}
-
-toggleThemeBtn.addEventListener("click", () => {
-  const manualTheme = localStorage.getItem("theme");
-
-  if (manualTheme === "dark") {
-    themeToggleBtnBall.classList.add("ballToggledToLightMode");
-    themeToggleBtnBall.classList.remove("ballToggledToDarkMode");
-    localStorage.setItem("theme", "light");
-    currentModeText.innerText = "Light mode";
-    document.body.classList.add("light");
-    document.body.classList.remove("dark");
-  } else {
-    themeToggleBtnBall.classList.remove("ballToggledToLightMode");
-    themeToggleBtnBall.classList.add("ballToggledToDarkMode");
-    localStorage.setItem("theme", "dark");
-    currentModeText.innerText = "Dark mode";
-    document.body.classList.toggle("dark");
-    document.body.classList.remove("light");
-  }
-});
-//
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: data.map(row => row.month),
+            datasets: [{
+                data: data.map(row => row.count),
+                borderWidth: 0,
+                backgroundColor: "#8576FF",
+                borderRadius: 2,
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 200,
+                    },
+                    grid: {
+                        color: '#ADA9BB',
+                        drawTicks: false,
+                        drawOnChartArea: true,
+                    },
+                    border: {
+                        display: false,
+                        dash: [3, 8]
+                    },
+                },
+                x: {
+                    grid: {
+                        color: '#ADA9BB',
+                        drawTicks: false,
+                        drawOnChartArea: true,
+                    },
+                    border: {
+                        display: false,
+                        dash: [3, 8]
+                    }
+                }
+            },
+            legend: {
+                display: false
+            },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+        }
+    });
+}())

@@ -5,7 +5,8 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>AlphaTwelve Event Management Dashboard</title>
+    <link rel="stylesheet" href="assets/theme.css" />
+    <title>Event Management Dashboard</title>
   </head>
   <body>
     <header>
@@ -244,7 +245,7 @@
     </header>
 
     <main>
-      <section class="summery-container">
+      <section class="summary-container">
         <h1>Welcome! here’s your summary</h1>
         <section class="quick-stats">
           <div>
@@ -279,9 +280,9 @@
                 </svg>
               </span>
             </h2>
-            <p>
+            <p class="stat-value">
               <span>100,000</span>
-              <span class="current-status">
+              <span class="stat-percentage">
                 <svg
                   width="10"
                   height="10"
@@ -333,9 +334,9 @@
                 </svg>
               </span>
             </h2>
-            <p>
+            <p class="stat-value">
               <span>25</span>
-              <span class="current-status">
+              <span class="stat-percentage neg-stat">
                 <svg
                   width="10"
                   height="10"
@@ -388,9 +389,9 @@
                 </svg>
               </span>
             </h2>
-            <p>
+            <p class="stat-value">
               <span>300</span>
-              <span class="current-status">
+              <span class="stat-percentage">
                 <svg
                   width="10"
                   height="10"
@@ -442,9 +443,9 @@
                 </svg>
               </span>
             </h2>
-            <p>
+            <p class="stat-value">
               <span>$500,000</span>
-              <span class="current-status">
+              <span class="stat-percentage">
                 <svg
                   width="10"
                   height="10"
@@ -468,9 +469,11 @@
         <section class="bar-chart-section">
           <h2>Event Registrations per month</h2>
           <div
-            class="chart"
+            class="bar-chart-container"
             aria-label="bar chart of event registrations per month"
-          ></div>
+          >
+            <canvas id="bar-chart"></canvas>
+          </div>
         </section>
         <section class="news-carousel" aria-labelledby="news carousel section">
           <button aria-labelledby="previous button">
