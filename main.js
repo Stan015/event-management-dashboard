@@ -15,71 +15,73 @@ toggleTheme(toggleThemeBtn);
 
 // Event registrations per month's bar chart
 (function eventBarChart() {
-    const ctx = document.getElementById('bar-chart');
+  const ctx = document.getElementById("bar-chart");
 
-    const data = [
-        {month: "Jan", count: 770},
-        {month: "Feb", count: 670},
-        {month: "Mar", count: 894},
-        {month: "Apr", count: 499},
-        {month: "May", count: 390},
-        {month: "Jun", count: 859},
-        {month: "Jul", count: 890},
-        {month: "Aug", count: 489},
-        {month: "Sep", count: 799},
-        {month: "Oct", count: 600},
-        {month: "Nov", count: 578},
-        {month: "Dec", count: 990},
-    ]
+  const data = [
+    { month: "Jan", count: 770 },
+    { month: "Feb", count: 670 },
+    { month: "Mar", count: 894 },
+    { month: "Apr", count: 499 },
+    { month: "May", count: 390 },
+    { month: "Jun", count: 859 },
+    { month: "Jul", count: 890 },
+    { month: "Aug", count: 489 },
+    { month: "Sep", count: 799 },
+    { month: "Oct", count: 600 },
+    { month: "Nov", count: 578 },
+    { month: "Dec", count: 990 },
+  ];
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: data.map(row => row.month),
-            datasets: [{
-                data: data.map(row => row.count),
-                borderWidth: 0,
-                backgroundColor: "#8576FF",
-                borderRadius: 2,
-            }]
+  new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: data.map((row) => row.month),
+      datasets: [
+        {
+          data: data.map((row) => row.count),
+          borderWidth: 0,
+          backgroundColor: "#8576FF",
+          borderRadius: 2,
         },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                    ticks: {
-                        stepSize: 200,
-                    },
-                    grid: {
-                        color: '#ADA9BB',
-                        drawTicks: false,
-                        drawOnChartArea: true,
-                    },
-                    border: {
-                        display: false,
-                        dash: [3, 8]
-                    },
-                },
-                x: {
-                    grid: {
-                        color: '#ADA9BB',
-                        drawTicks: false,
-                        drawOnChartArea: true,
-                    },
-                    border: {
-                        display: false,
-                        dash: [3, 8]
-                    }
-                }
-            },
-            legend: {
-                display: false
-            },
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-        }
-    });
-}())
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            stepSize: 200,
+          },
+          grid: {
+            color: "#ADA9BB",
+            drawTicks: false,
+            drawOnChartArea: true,
+          },
+          border: {
+            display: false,
+            dash: [3, 8],
+          },
+        },
+        x: {
+          grid: {
+            color: "#ADA9BB",
+            drawTicks: false,
+            drawOnChartArea: true,
+          },
+          border: {
+            display: false,
+            dash: [3, 8],
+          },
+        },
+      },
+      legend: {
+        display: false,
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+    },
+  });
+})();

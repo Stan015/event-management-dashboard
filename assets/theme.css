@@ -40,7 +40,7 @@
     }
   }
 
-  header .user-profile-container {
+  header .nav-wrapper .user-profile-container {
     &:hover {
       background-color: var(--bg-accent);
 
@@ -54,7 +54,39 @@
   main .summary-container .bar-chart-section .bar-chart-container {
     border: none;
     background-color: var(--bg-secondary);
-}
+  }
+
+  main .event-history .event-history-table {
+    & thead tr {
+      background-color: var(--bg-secondary);
+    }
+
+    & tbody tr {
+      & .in-progress {
+        background-color: unset;
+        border: 1px solid var(--clr-blue);
+      }
+
+      & .completed {
+        background-color: unset;
+        border: 1px solid var(--clr-green);
+      }
+    }
+  }
+
+  main .event-history .event-history-table-ftr {
+    & .event-h-t-prev-btn,
+    & .event-h-t-next-btn,
+    & .table-page {
+      background-color: var(--bg-secondary);
+
+      & svg {
+        & path {
+          stroke: var(--clr-purple);
+        }
+      }
+    }
+  }
 }
 
 .dark {
@@ -91,7 +123,7 @@
     }
   }
 
-  header .user-profile-container {
+  header .nav-wrapper .user-profile-container {
     &:hover {
       background-color: var(--bg-accent);
 
@@ -105,6 +137,38 @@
   main .summary-container .bar-chart-section .bar-chart-container {
     border: none;
     background-color: var(--bg-secondary);
+  }
+
+  main .event-history .event-history-table {
+    & thead tr {
+      background-color: var(--bg-secondary);
+    }
+
+    & tbody tr {
+      & .in-progress {
+        background-color: unset;
+        border: 1px solid var(--clr-blue);
+      }
+
+      & .completed {
+        background-color: unset;
+        border: 1px solid var(--clr-green);
+      }
+    }
+  }
+
+  main .event-history .event-history-table-ftr {
+    & .event-h-t-prev-btn,
+    & .event-h-t-next-btn,
+    & .table-page {
+      background-color: var(--bg-secondary);
+
+      & svg {
+        & path {
+          stroke: var(--clr-purple);
+        }
+      }
+    }
   }
 }
 
@@ -139,7 +203,7 @@
     }
   }
 
-  header .user-profile-container {
+  header .nav-wrapper .user-profile-container {
     &:hover {
       background-color: var(--bg-accent);
 
@@ -153,5 +217,38 @@
   main .summary-container .bar-chart-section .bar-chart-container {
     border: 1px solid var(--clr-light-gray);
     background-color: unset;
+  }
+
+  main .event-history .event-history-table {
+    & thead tr {
+      background-color: var(--clr-light-gray);
+    }
+
+    & tbody tr {
+      & .in-progress {
+        background-color: var(--clr-light-blue);
+        border: none;
+      }
+
+      & .completed {
+        background-color: var(--clr-light-green);
+        border: none;
+      }
+    }
+  }
+
+  main .event-history .event-history-table-ftr {
+    & .event-h-t-prev-btn,
+    & .event-h-t-next-btn,
+    & .table-page {
+      background-color: var(--clr-light-gray);
+      color: var(--clr-white);
+
+      & svg {
+        & path {
+          stroke: var(--clr-primary);
+        }
+      }
+    }
   }
 }
