@@ -145,8 +145,8 @@
         }
       }
     }
-    }
   }
+}
 
 .dark {
   :root {
@@ -338,7 +338,6 @@
         background-color: var(--bg-primary);
         border: 1px solid var(--clr-light-gray);
       }
-
     }
 
     & .other-options-btn,

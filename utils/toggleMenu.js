@@ -51,25 +51,30 @@ function toggleMobileMenu(mobileToggleBtn, navLinksContainer) {
     } else {
       mobileToggleBtn.setAttribute("aria-expanded", "false");
       navLinksContainer.setAttribute("aria-hidden", "true");
-
     }
   });
 
   const mediaQuery = window.matchMedia("(max-width: 824px)");
 
-  mediaQuery.addEventListener("change",(e) => {
-    if (mediaQuery.matches && mobileToggleBtn.getAttribute("aria-expanded") === "false") {
+  mediaQuery.addEventListener("change", (e) => {
+    if (
+      mediaQuery.matches &&
+      mobileToggleBtn.getAttribute("aria-expanded") === "false"
+    ) {
       navLinksContainer.setAttribute("aria-hidden", "true");
     }
 
-    if (mediaQuery.matches && mobileToggleBtn.getAttribute("aria-expanded") === "true") {
+    if (
+      mediaQuery.matches &&
+      mobileToggleBtn.getAttribute("aria-expanded") === "true"
+    ) {
       navLinksContainer.setAttribute("aria-hidden", "false");
     }
 
     if (!mediaQuery.matches) {
       navLinksContainer.setAttribute("aria-hidden", "false");
     }
-  })
+  });
 }
 //
 

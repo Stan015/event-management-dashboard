@@ -707,11 +707,11 @@
               name="select-status"
               id="select-status"
             >
-              <option>Status</option>
-              <option>Completed</option>
-              <option>In Progress</option>
-              <option>Cancelled</option>
+              <option value="">Status</option>
+              <option value="Completed">Completed</option>
+              <option value="In Progress">In Progress</option>
             </select>
+
             <svg
               width="16"
               height="16"
@@ -758,15 +758,17 @@
           </span>
 
           <p aria-label="number of results" class="number-of-results">
-            Displaying 100 results
+            Displaying 5 results
           </p>
 
           <label class="sort-label">
             Sort:
             <span class="sort-span">
               <select name="sort-events" id="sort-events">
-                <option>Most Recent</option>
-                <option>Alphabetically</option>
+                <option value="">Select</option>
+                <option value="most recent">Most Recent</option>
+                <!--                <option value="last modified">Last Modified</option>-->
+                <!--                <option value="date completed">Date Completed</option>-->
               </select>
               <svg
                 width="16"
@@ -870,6 +872,7 @@
             </tr>
           </tbody>
         </table>
+        <p class="noResults" style="display: none">No Result found</p>
         <div class="event-history-table-ftr">
           <div class="event-h-t-navigation-btns">
             <button aria-label="previous table page" class="event-h-t-prev-btn">

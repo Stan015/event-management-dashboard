@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "chart.js": "^4.4.5",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "simple-git-hooks": "^2.11.1"
   },
   "simple-git-hooks": {

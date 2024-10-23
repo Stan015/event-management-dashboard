@@ -1,6 +1,7 @@
 import { toggleMenu, toggleMobileMenu } from "./utils/toggleMenu.js";
 import toggleTheme from "./utils/toggleTheme.js";
 import Chart from "chart.js/auto";
+import "./utils/downloadTable.js";
 
 const toggleMenuBtn = document.querySelector(".toggle-menu");
 const navLinks = document.querySelectorAll(".primary-nav a .nav-link-text");
@@ -93,3 +94,174 @@ toggleTheme(toggleThemeBtn);
     },
   });
 })();
+
+// Event history table
+// search by text input
+const searchInput = document.getElementById("search-event");
+const eventHistoryTable = document.querySelector(".event-history-table");
+const displayTotalNumberOfResults =
+  document.querySelector(".number-of-results");
+
+searchInput.addEventListener("keyup", () => {
+  const filter = searchInput.value.trim().toLowerCase();
+  let totalResult = [];
+
+  const rows = eventHistoryTable.getElementsByTagName("tr");
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const cells = row.getElementsByTagName("td");
+    let rowContainsText = false;
+
+    for (let j = 0; j < cells.length; j++) {
+      const cell = cells[j];
+      if (cell) {
+        const cellText = cell.textContent || cell.innerText;
+        if (cellText.toLowerCase().includes(filter)) {
+          rowContainsText = true;
+          break;
+        }
+      }
+    }
+
+    if (filter === "") {
+      row.style.display = "";
+      totalResult.push(row);
+    } else if (rowContainsText) {
+      row.style.display = "";
+      totalResult.push(row);
+    } else {
+      row.style.display = "none";
+    }
+  }
+
+  const noResultsMessage = document.querySelector(".noResults");
+  totalResult.length === 0
+    ? (noResultsMessage.style.display = "block")
+    : (noResultsMessage.style.display = "none");
+
+  displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
+});
+
+// search by date
+const dateInput = document.getElementById("select-date");
+
+dateInput.addEventListener("change", () => {
+  const filter = dateInput.value;
+  let totalResult = [];
+
+  console.log(filter);
+  const rows = eventHistoryTable.getElementsByTagName("tr");
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const dateCell = row.getElementsByTagName("td")[1];
+
+    if (dateCell) {
+      const cellDate = dateCell.textContent || dateCell.innerText;
+
+      if (filter === "") {
+        row.style.display = "";
+        totalResult.push(row);
+      } else if (cellDate === filter) {
+        row.style.display = "";
+        totalResult.push(row);
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+
+  const noResultsMessage = document.querySelector(".noResults");
+  totalResult.length === 0
+    ? (noResultsMessage.style.display = "block")
+    : (noResultsMessage.style.display = "none");
+
+  displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
+});
+
+// Search based of status
+const selectStatus = document.getElementById("select-status");
+
+selectStatus.addEventListener("change", () => {
+  const filter = selectStatus.value.trim();
+  let totalResult = [];
+  const rows = eventHistoryTable.getElementsByTagName("tr");
+
+  for (let i = 1; i < rows.length; i++) {
+    const row = rows[i];
+    const statusCell = row.getElementsByTagName("td")[3];
+
+    if (statusCell) {
+      const statusText = statusCell.textContent || statusCell.innerText;
+
+      if (filter === "") {
+        row.style.display = "";
+        totalResult.push(row);
+      } else if (statusText === filter) {
+        row.style.display = "";
+        totalResult.push(row);
+      } else {
+        row.style.display = "none";
+      }
+    }
+  }
+
+  const noResultsMessage = document.querySelector(".noResults");
+  totalResult.length === 0
+    ? (noResultsMessage.style.display = "block")
+    : (noResultsMessage.style.display = "none");
+
+  displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
+});
+
+// Sort table
+const sortOptions = document.getElementById("sort-events");
+
+// Save a copy of the original rows
+const tbody = eventHistoryTable.querySelector("tbody");
+const originalRows = Array.from(tbody.querySelectorAll("tr")).slice(0);
+
+sortOptions.addEventListener("change", () => {
+  const filter = sortOptions.value.trim();
+  let totalResult = [];
+  const rows = Array.from(tbody.querySelectorAll("tr"));
+
+  if (filter === "") {
+    tbody.innerHTML = "";
+    originalRows.forEach((row) => tbody.appendChild(row.cloneNode(true)));
+    totalResult = Array.from(tbody.querySelectorAll("tr"));
+  } else {
+    for (let i = 0; i < rows.length; i++) {
+      const row = rows[i];
+      const dateOfEvent = row.getElementsByTagName("td")[1];
+
+      if (dateOfEvent) {
+        if (filter === "most recent") {
+          row.style.display = "";
+          totalResult.push(row);
+        } else {
+          row.style.display = "none";
+        }
+      }
+    }
+
+    // Sort the results based on date (newest to oldest)
+    totalResult.sort((a, b) => {
+      const dateA = new Date(a.getElementsByTagName("td")[1].textContent);
+      const dateB = new Date(b.getElementsByTagName("td")[1].textContent);
+      return dateB - dateA; // Sort in descending order for most recent
+    });
+
+    tbody.innerHTML = "";
+    totalResult.forEach((row) => tbody.appendChild(row));
+  }
+
+  const noResultsMessage = document.querySelector(".noResults");
+  totalResult.length === 0
+    ? (noResultsMessage.style.display = "block")
+    : (noResultsMessage.style.display = "none");
+
+  displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
+});
+//
