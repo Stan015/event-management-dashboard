@@ -50,6 +50,22 @@
     }
   }
 
+  main .event-history .legend-options-container {
+    & span {
+      & input,
+      & select {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--bg-secondary);
+      }
+    }
+
+    & .other-options-btn,
+    & .export-btn {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--bg-secondary);
+    }
+  }
+
   main .summary-container .quick-stats div,
   main .summary-container .bar-chart-section .bar-chart-container {
     border: none;
@@ -62,6 +78,8 @@
     }
 
     & tbody tr {
+      background-color: var(--bg-secondary);
+
       & .in-progress {
         background-color: unset;
         border: 1px solid var(--clr-blue);
@@ -86,8 +104,49 @@
         }
       }
     }
+
+    & .label-row-count {
+      & span {
+        & select {
+          border: 1px solid var(--bg-secondary);
+          background-color: var(--bg-secondary);
+        }
+
+        & svg {
+          & path {
+            stroke: var(--clr-primary);
+          }
+        }
+      }
+    }
   }
-}
+
+  @media screen and (max-width: 824px) {
+    header {
+      & .logo-container {
+        background-color: var(--bg-secondary);
+
+        & .mobile-menu {
+          & svg {
+            & path {
+              stroke: var(--clr-primary);
+            }
+          }
+
+          &[aria-expanded="true"] {
+            background-color: var(--clr-light-gray);
+
+            & .close-mobile-menu {
+              & path {
+                stroke: var(--clr-secondary);
+              }
+            }
+          }
+        }
+      }
+    }
+    }
+  }
 
 .dark {
   :root {
@@ -133,6 +192,22 @@
     }
   }
 
+  main .event-history .legend-options-container {
+    & span {
+      & input,
+      & select {
+        background-color: var(--bg-secondary);
+        border: 1px solid var(--bg-secondary);
+      }
+    }
+
+    & .other-options-btn,
+    & .export-btn {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--bg-secondary);
+    }
+  }
+
   main .summary-container .quick-stats div,
   main .summary-container .bar-chart-section .bar-chart-container {
     border: none;
@@ -145,6 +220,8 @@
     }
 
     & tbody tr {
+      background-color: var(--bg-secondary);
+
       & .in-progress {
         background-color: unset;
         border: 1px solid var(--clr-blue);
@@ -153,6 +230,32 @@
       & .completed {
         background-color: unset;
         border: 1px solid var(--clr-green);
+      }
+    }
+
+    @media screen and (max-width: 824px) {
+      header {
+        & .logo-container {
+          background-color: var(--bg-secondary);
+
+          & .mobile-menu {
+            & svg {
+              & path {
+                stroke: var(--clr-primary);
+              }
+            }
+
+            &[aria-expanded="true"] {
+              background-color: var(--clr-light-gray);
+
+              & .close-mobile-menu {
+                & path {
+                  stroke: var(--clr-secondary);
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -166,6 +269,21 @@
       & svg {
         & path {
           stroke: var(--clr-purple);
+        }
+      }
+    }
+
+    & .label-row-count {
+      & span {
+        & select {
+          border: 1px solid var(--bg-secondary);
+          background-color: var(--bg-secondary);
+        }
+
+        & svg {
+          & path {
+            stroke: var(--clr-primary);
+          }
         }
       }
     }
@@ -213,6 +331,23 @@
     }
   }
 
+  main .event-history .legend-options-container {
+    & span {
+      & input,
+      & select {
+        background-color: var(--bg-primary);
+        border: 1px solid var(--clr-light-gray);
+      }
+
+    }
+
+    & .other-options-btn,
+    & .export-btn {
+      border: 1px solid var(--clr-light-gray);
+      background-color: unset;
+    }
+  }
+
   main .summary-container .quick-stats div,
   main .summary-container .bar-chart-section .bar-chart-container {
     border: 1px solid var(--clr-light-gray);
@@ -225,6 +360,8 @@
     }
 
     & tbody tr {
+      background-color: var(--bg-primary);
+
       & .in-progress {
         background-color: var(--clr-light-blue);
         border: none;
@@ -247,6 +384,42 @@
       & svg {
         & path {
           stroke: var(--clr-primary);
+        }
+      }
+    }
+
+    & .label-row-count {
+      & span {
+        & select {
+          border: 1px solid var(--clr-light-gray);
+          background-color: unset;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 824px) {
+    header {
+      & .logo-container {
+        background-color: var(--bg-primary);
+
+        & .mobile-menu {
+          & svg {
+            & path {
+              stroke: var(--clr-primary);
+            }
+          }
+
+          &[aria-expanded="true"] {
+            background-color: unset;
+            border-color: var(--clr-light-gray);
+
+            & .close-mobile-menu {
+              & path {
+                stroke: var(--clr-primary);
+              }
+            }
+          }
         }
       }
     }

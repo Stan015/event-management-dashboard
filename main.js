@@ -1,4 +1,4 @@
-import toggleMenu from "./utils/toggleMenu.js";
+import { toggleMenu, toggleMobileMenu } from "./utils/toggleMenu.js";
 import toggleTheme from "./utils/toggleTheme.js";
 import Chart from "chart.js/auto";
 
@@ -7,8 +7,15 @@ const navLinks = document.querySelectorAll(".primary-nav a .nav-link-text");
 const toggleThemeBtn = document.querySelector(".toggle-theme");
 const userProfileCardInfo = document.querySelector(".user-info");
 
-// toggle menu
+// toggle menu collapse
 toggleMenu(toggleMenuBtn, navLinks, toggleThemeBtn, userProfileCardInfo);
+
+// toggle mobile menu drop down
+const mobileMenuBtn = document.querySelector(".mobile-menu");
+const navLinksContainer = document.querySelector(".nav-wrapper");
+
+toggleMobileMenu(mobileMenuBtn, navLinksContainer);
+//
 
 // toggle theme
 toggleTheme(toggleThemeBtn);
@@ -46,6 +53,7 @@ toggleTheme(toggleThemeBtn);
       ],
     },
     options: {
+      maintainAspectRatio: false,
       scales: {
         y: {
           beginAtZero: true,
