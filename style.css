@@ -463,6 +463,10 @@ main .summary-container .news-carousel {
     &:hover {
       background-color: var(--bg-accent);
     }
+
+    &:disabled {
+      background-color: transparent;
+    }
   }
 
   & .prev-btn {
@@ -522,6 +526,7 @@ main .summary-container .news-carousel {
       border: none;
       border-radius: 100%;
       background-color: var(--clr-light-gray);
+      cursor: pointer;
     }
 
     & button[aria-current="true"] {
@@ -781,7 +786,6 @@ main .event-history #event-detail-popover {
     align-self: center;
     justify-self: center;
     overflow: hidden;
-
 
     & .po-first-child-div {
       display: flex;

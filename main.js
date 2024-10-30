@@ -2,6 +2,7 @@ import { toggleMenu, toggleMobileMenu } from "./utils/toggleMenu.js";
 import toggleTheme from "./utils/toggleTheme.js";
 import Chart from "chart.js/auto";
 import "./utils/downloadTable.js";
+import "./utils/newsCarousel.js";
 
 const toggleMenuBtn = document.querySelector(".toggle-menu");
 const navLinks = document.querySelectorAll(".primary-nav a .nav-link-text");
@@ -276,7 +277,7 @@ const togglePopover = () => {
   } else {
     popoverInfoCard.style.display = "grid";
   }
-}
+};
 
 closePopoverBtn.addEventListener("click", togglePopover);
 
@@ -292,11 +293,14 @@ for (let i = 1; i < rows.length; i++) {
     // const statusCell = row.getElementsByTagName("td")[3];
     // const eventDescription = row.getElementsByTagName("td")[4];
 
-    popoverInfoCard.querySelector(".po-event-name").innerText = eventName.innerText;
-    popoverInfoCard.querySelector(".po-event-date").innerText = eventDate.innerText;
+    popoverInfoCard.querySelector(".po-event-name").innerText =
+      eventName.innerText;
+    popoverInfoCard.querySelector(".po-event-date").innerText =
+      eventDate.innerText;
     // popoverInfoCard.querySelector(".po-event-description").innerText = eventDescription.innerText;
     // popoverInfoCard.querySelector(".po-event-name").innerText = eventName.innerText;
 
-    togglePopover()
+    togglePopover();
   });
 }
+//

@@ -30,6 +30,8 @@ A pixel-perfect event management dashboard that is responsive at all screens wit
 - Sort table by status
 - Display number of items in table
 - Download table as pdf
+- Popover
+- Carousel
 - Cool transitions and animations
 - Clean, maintainable code and best practices. Modern semantic HTML, Well structured modern CSS, well commented js functions. + code splitting for easy debugging and maintenance
 - High performance

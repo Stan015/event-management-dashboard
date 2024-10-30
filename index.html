@@ -604,12 +604,12 @@
             <div class="item item2">
               <img src="/Slide2.png" alt="an image of a man" />
               <div>
-                <h3>Latest News & Updates</h3>
+                <h3>Latest News & Updates 2</h3>
                 <p>
-                  Turpis interdum nunc varius ornare dignissim pretium. Massa
-                  ornare quis aliquet sed vitae. Sed velit nisi, fermentum erat.
-                  Fringilla purus, erat fringilla tincidunt quisque non.
-                  Pellentesque in ut tellus.
+                  Pellentesque fermentum pulvinar purus, sed aliquam enim
+                  vehicula eget. Nulla nec quam enim. Aliquam non mi vel massa
+                  ultricies ultrices id et est. Duis gravida sagittis neque, et
+                  varius mauris maximus ut.
                 </p>
               </div>
             </div>
@@ -619,30 +619,17 @@
                 alt="an image of a desk with laptops on it"
               />
               <div>
-                <h3>Latest News & Updates</h3>
+                <h3>Latest News & Updates 3</h3>
                 <p>
-                  Turpis interdum nunc varius ornare dignissim pretium. Massa
-                  ornare quis aliquet sed vitae. Sed velit nisi, fermentum erat.
-                  Fringilla purus, erat fringilla tincidunt quisque non.
-                  Pellentesque in ut tellus.
+                  Vivamus tempus, felis et semper placerat, elit leo varius ex,
+                  euismod suscipit nisl leo vitae purus. Sed faucibus quam at mi
+                  pharetra, non vestibulum nisi iaculis. Pellentesque augue
+                  lorem, convallis ut varius nec, porttitor sed nisi.
                 </p>
               </div>
             </div>
           </div>
-          <div class="slide-indicator">
-            <button
-              aria-label="news slide button indicator"
-              aria-current="true"
-            ></button>
-            <button
-              aria-label="news slide button indicator"
-              aria-current="false"
-            ></button>
-            <button
-              aria-label="news slide button indicator"
-              aria-current="false"
-            ></button>
-          </div>
+          <div class="slide-indicator"></div>
         </section>
       </section>
       <section class="event-history">
@@ -840,7 +827,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr popovertarget="event-detail-popover" popovertargetaction="toggle">
+            <tr
+              popovertarget="event-detail-popover"
+              popovertargetaction="toggle"
+            >
               <td>Cloud Innovation Summit</td>
               <td>2024-10-15</td>
               <td>Jane Doe</td>
@@ -872,27 +862,54 @@
             </tr>
           </tbody>
         </table>
-        <div popover id="event-detail-popover" >
+        <div popover id="event-detail-popover">
           <div class="popover-container">
             <div class="po-first-child-div">
               <h4 class="po-event-name">Event Name</h4>
               <button popovertargetaction="hide" class="po-close-btn">
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.625 3.375L3.375 8.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  <path d="M3.375 3.375L8.625 8.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8.625 3.375L3.375 8.625"
+                    stroke="#334155"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M3.375 3.375L8.625 8.625"
+                    stroke="#334155"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
                 </svg>
               </button>
             </div>
             <p class="po-event-date">Event Date</p>
-            <textarea class="po-event-description" name="pp-event-description" aria-label="event description popover">Event Description</textarea>
+            <textarea
+              class="po-event-description"
+              name="pp-event-description"
+              aria-label="event description popover"
+            >
+Event Description</textarea
+            >
             <div class="po-avatar-container">
-              <img src="/Avatar1.svg" alt="avatar">
-              <img src="/Avatar2.svg" alt="avatar">
-              <img src="/Avatar3.svg" alt="avatar">
+              <img src="/Avatar1.svg" alt="avatar" />
+              <img src="/Avatar2.svg" alt="avatar" />
+              <img src="/Avatar3.svg" alt="avatar" />
             </div>
 
             <div class="po-guest-container">
-              <p class="po-guest-speakers">3 Guest Speakers: Speaker name A, Speaker name B, Speaker name C.</p>
+              <p class="po-guest-speakers">
+                3 Guest Speakers: Speaker name A, Speaker name B, Speaker name
+                C.
+              </p>
               <p class="po-number-of-speakers">300 Attendees</p>
             </div>
 
