@@ -265,3 +265,38 @@ sortOptions.addEventListener("change", () => {
   displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
 });
 //
+
+// Event detail popover
+const popoverInfoCard = document.getElementById("event-detail-popover");
+const closePopoverBtn = document.querySelector(".po-close-btn");
+
+const togglePopover = () => {
+  if (popoverInfoCard.style.display === "grid") {
+    popoverInfoCard.style.display = "none";
+  } else {
+    popoverInfoCard.style.display = "grid";
+  }
+}
+
+closePopoverBtn.addEventListener("click", togglePopover);
+
+const rows = eventHistoryTable.getElementsByTagName("tr");
+
+for (let i = 1; i < rows.length; i++) {
+  const row = rows[i];
+
+  row.addEventListener("click", () => {
+    const eventName = row.getElementsByTagName("td")[0];
+    const eventDate = row.getElementsByTagName("td")[1];
+    // const speaker = row.getElementsByTagName("td")[2];
+    // const statusCell = row.getElementsByTagName("td")[3];
+    // const eventDescription = row.getElementsByTagName("td")[4];
+
+    popoverInfoCard.querySelector(".po-event-name").innerText = eventName.innerText;
+    popoverInfoCard.querySelector(".po-event-date").innerText = eventDate.innerText;
+    // popoverInfoCard.querySelector(".po-event-description").innerText = eventDescription.innerText;
+    // popoverInfoCard.querySelector(".po-event-name").innerText = eventName.innerText;
+
+    togglePopover()
+  });
+}

@@ -840,31 +840,31 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr popovertarget="event-detail-popover" popovertargetaction="toggle">
               <td>Cloud Innovation Summit</td>
               <td>2024-10-15</td>
               <td>Jane Doe</td>
               <td class="completed">Completed</td>
             </tr>
-            <tr>
+            <tr popovertarget="event-detail-popover">
               <td>Smart Cities Forum</td>
               <td>2024-11-29</td>
               <td>Stanley Azi</td>
               <td class="in-progress">In Progress</td>
             </tr>
-            <tr>
+            <tr popovertarget="event-detail-popover">
               <td>Blockchain Revolution Conference</td>
               <td>2024-03-23</td>
               <td>Dr. Aisha Malik</td>
               <td class="completed">Completed</td>
             </tr>
-            <tr>
+            <tr popovertarget="event-detail-popover">
               <td>Cybersecurity for Startups</td>
               <td>2024-11-19</td>
               <td>Emily Zhang</td>
               <td class="completed">Completed</td>
             </tr>
-            <tr>
+            <tr popovertarget="event-detail-popover">
               <td>AI in Healthcare Symposium</td>
               <td>2024-12-02</td>
               <td>Rachel Moore</td>
@@ -872,6 +872,39 @@
             </tr>
           </tbody>
         </table>
+        <div popover id="event-detail-popover" >
+          <div class="popover-container">
+            <div class="po-first-child-div">
+              <h4 class="po-event-name">Event Name</h4>
+              <button popovertargetaction="hide" class="po-close-btn">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.625 3.375L3.375 8.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M3.375 3.375L8.625 8.625" stroke="#334155" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <p class="po-event-date">Event Date</p>
+            <textarea class="po-event-description" name="pp-event-description" aria-label="event description popover">Event Description</textarea>
+            <div class="po-avatar-container">
+              <img src="/Avatar1.svg" alt="avatar">
+              <img src="/Avatar2.svg" alt="avatar">
+              <img src="/Avatar3.svg" alt="avatar">
+            </div>
+
+            <div class="po-guest-container">
+              <p class="po-guest-speakers">3 Guest Speakers: Speaker name A, Speaker name B, Speaker name C.</p>
+              <p class="po-number-of-speakers">300 Attendees</p>
+            </div>
+
+            <div class="po-action-btns-container">
+              <button class="po-edit-event">Edit</button>
+              <div class="child-wrapper">
+                <button class="po-delete-event">Delete</button>
+                <button class="po-mark-as-completed">Mark as completed</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <p class="noResults" style="display: none">No Result found</p>
         <div class="event-history-table-ftr">
           <div class="event-h-t-navigation-btns">

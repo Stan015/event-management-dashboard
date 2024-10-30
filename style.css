@@ -343,7 +343,6 @@ header .nav-wrapper .user-profile-container .user-info {
 main {
   display: block;
   margin: 1.5rem 2rem;
-  min-height: 100svh;
 }
 
 main .summary-container {
@@ -695,6 +694,8 @@ main .event-history .event-history-table {
       padding: 0 1rem;
       border-radius: 0.4rem;
       font-size: 1rem;
+      border-left: 1px solid transparent;
+      transition: all 200ms ease-in-out;
 
       & .completed,
       & .in-progress {
@@ -740,6 +741,11 @@ main .event-history .event-history-table {
 
   & tbody {
     gap: 0.2rem;
+    cursor: pointer;
+
+    & tr:hover {
+      border-left: 1px solid var(--clr-accent);
+    }
   }
 
   & thead tr {
@@ -752,6 +758,170 @@ main .event-history .event-history-table {
 
 main .event-history .noResults {
   color: var(--clr-red);
+}
+
+main .event-history #event-detail-popover {
+  display: none;
+  width: 100svw;
+  height: 100svh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 30;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+
+  & .popover-container {
+    display: block;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--clr-light-gray);
+    max-width: 30rem;
+    border-radius: 0.4rem;
+    position: absolute;
+    align-self: center;
+    justify-self: center;
+    overflow: hidden;
+
+
+    & .po-first-child-div {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1rem 0 1rem;
+
+      & h4 {
+        color: var(--clr-primary);
+        font-size: 1rem;
+      }
+
+      & .po-close-btn {
+        display: inherit;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        border: 1px solid var(--clr-light-gray);
+        background-color: var(--bg-primary);
+        cursor: pointer;
+        transition: all 200ms ease-in-out;
+
+        &:hover {
+          background-color: var(--bg-accent);
+        }
+
+        & svg {
+          width: 2rem;
+          height: 2rem;
+
+          & path {
+            stroke: var(--clr-primary);
+          }
+        }
+      }
+    }
+
+    & p {
+      color: var(--clr-primary);
+      padding-inline: 1rem;
+    }
+
+    & .po-event-description {
+      width: calc(100% - 2rem);
+      border: none;
+      margin-block: 0.5rem;
+      background-color: var(--bg-primary);
+      margin-inline: 1rem;
+    }
+
+    & .po-avatar-container {
+      display: flex;
+      margin-bottom: 0.5rem;
+      position: relative;
+      align-items: center;
+      height: 4rem;
+      width: 4rem;
+      margin-inline: 1rem;
+
+      & img {
+        width: 3rem;
+        height: 3rem;
+        position: absolute;
+        border: 2px solid var(--bg-accent);
+        background-color: var(--clr-light-blue);
+        border-radius: 50%;
+        --x-distance: 0rem;
+        --z-index: 100;
+
+        &:is(:first-child) {
+          left: var(--x-distance);
+          z-index: var(--z-index);
+        }
+
+        &:is(:nth-child(2)) {
+          left: calc(var(--x-distance) + 2rem);
+          z-index: calc(var(--z-index) - 10);
+        }
+
+        &:is(:nth-child(3)) {
+          left: calc(var(--x-distance) + 4rem);
+          z-index: calc(var(--z-index) - 20);
+        }
+      }
+    }
+
+    & .po-action-btns-container {
+      display: flex;
+      width: 100%;
+      height: 5rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background-color: var(--bg-secondary);
+      padding: 1rem;
+      margin-top: 1rem;
+
+      & button {
+        display: flex;
+        align-items: center;
+        border: none;
+        color: var(--clr-white);
+        border-radius: 0.4rem;
+        padding-block: 0.5rem;
+        padding-inline: 1.5rem;
+        font-size: 1.2rem;
+        transition: all 200ms ease-in-out;
+
+        &:hover {
+          transform: translateY(-0.3rem);
+        }
+      }
+
+      & .po-edit-event {
+        color: #000000;
+        background-color: var(--clr-white);
+        border: 1px solid var(--clr-light-gray);
+      }
+
+      & .child-wrapper {
+        display: inherit;
+        align-items: center;
+        gap: 0.5rem;
+
+        & .po-delete-event {
+          background-color: var(--clr-red);
+          color: var(--clr-white);
+        }
+
+        & .po-mark-as-completed {
+          background-color: var(--clr-purple);
+          color: var(--clr-white);
+        }
+      }
+    }
+  }
 }
 
 main .event-history .event-history-table-ftr {
