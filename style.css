@@ -763,8 +763,8 @@ main .event-history .noResults {
 main .event-history #event-detail-popover {
   display: none;
   width: 100svw;
-  height: 100svh;
-  position: absolute;
+  height: 100dvh;
+  position: fixed;
   top: 0;
   left: 0;
   z-index: 30;
@@ -1262,6 +1262,20 @@ main .event-history .event-history-table-ftr {
       & span {
         & select {
           width: 6rem;
+        }
+      }
+    }
+  }
+
+  main .event-history #event-detail-popover {
+    & .popover-container {
+      max-width: 20rem;
+
+      & .po-action-btns-container {
+        & button {
+          padding-block: 0.4rem;
+          padding-inline: 0.8rem;
+          font-size: 0.8rem;
         }
       }
     }
