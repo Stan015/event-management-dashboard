@@ -3,6 +3,7 @@ import toggleTheme from "./utils/toggleTheme.js";
 import Chart from "chart.js/auto";
 import "./utils/downloadTable.js";
 import "./utils/newsCarousel.js";
+import { eventHistoryTableData } from "./data/eventTableData.json";
 
 const toggleMenuBtn = document.querySelector(".toggle-menu");
 const navLinks = document.querySelectorAll(".primary-nav a .nav-link-text");
@@ -97,175 +98,217 @@ toggleTheme(toggleThemeBtn);
 })();
 
 // Event history table
-// search by text input
-const searchInput = document.getElementById("search-event");
 const eventHistoryTable = document.querySelector(".event-history-table");
+const eventHistoryData = Array.from(eventHistoryTableData);
+let currentData = [...eventHistoryData];
+
+const prevBtn = document.querySelector(".event-h-t-prev-btn");
+const nextBtn = document.querySelector(".event-h-t-next-btn");
+const pageButtonsContainer = document.querySelector(
+  ".table-page-number-container",
+);
+const selectNumberOfRowsPerPage = document.querySelector(".row-count");
+
+let currentPage = 1;
+let numberOfRowsPerPage = parseInt(selectNumberOfRowsPerPage.value.trim(), 10);
+let totalPages = Math.ceil(eventHistoryData.length / numberOfRowsPerPage);
+
 const displayTotalNumberOfResults =
   document.querySelector(".number-of-results");
 
-searchInput.addEventListener("keyup", () => {
-  const filter = searchInput.value.trim().toLowerCase();
-  let totalResult = [];
+function buildTableRows(
+  tableData = currentData,
+  rowsPerPage = numberOfRowsPerPage,
+) {
+  const tbody = eventHistoryTable.querySelector("tbody");
+  tbody.innerHTML = "";
 
-  const rows = eventHistoryTable.getElementsByTagName("tr");
+  // Calculate the range of rows for the current page
+  const start = (currentPage - 1) * rowsPerPage;
+  const end = start + rowsPerPage;
+  const pageData = tableData.slice(start, end);
 
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
-    const cells = row.getElementsByTagName("td");
-    let rowContainsText = false;
+  // Populate rows with the data for the current page
+  pageData.forEach((data) => {
+    tbody.innerHTML += `
+      <tr 
+         popovertarget="event-detail-popover"
+         popovertargetaction="toggle"
+      >
+         <td>${data["event name"]}</td>
+         <td>${data.date}</td>
+         <td>${data.speaker}</td>
+         <td class=${data.status === "Completed" ? "completed" : "in-progress"}>${data.status}</td>
+      </tr>
+    `;
+  });
 
-    for (let j = 0; j < cells.length; j++) {
-      const cell = cells[j];
-      if (cell) {
-        const cellText = cell.textContent || cell.innerText;
-        if (cellText.toLowerCase().includes(filter)) {
-          rowContainsText = true;
-          break;
-        }
-      }
-    }
+  attachRowClickEvents(); // for popover
 
-    if (filter === "") {
-      row.style.display = "";
-      totalResult.push(row);
-    } else if (rowContainsText) {
-      row.style.display = "";
-      totalResult.push(row);
-    } else {
-      row.style.display = "none";
-    }
+  totalPages = Math.ceil(tableData.length / rowsPerPage);
+  updatePageButtons();
+  updateNavigationButtons();
+
+  displayTotalNumberOfResults.innerText = `Displaying ${tableData.length} results`;
+}
+
+function updatePageButtons() {
+  pageButtonsContainer.innerHTML = "";
+
+  // Create page buttons
+  for (let i = 1; i <= totalPages; i++) {
+    const pageBtn = document.createElement("button");
+    pageBtn.classList.add("table-page");
+    pageBtn.setAttribute("aria-label", `page number ${i}`);
+    pageBtn.setAttribute("aria-current", i === currentPage ? "true" : "false");
+    pageBtn.textContent = i;
+
+    pageBtn.addEventListener("click", () => {
+      currentPage = i;
+      buildTableRows(eventHistoryData, numberOfRowsPerPage);
+    });
+
+    pageButtonsContainer.appendChild(pageBtn);
   }
+}
 
-  const noResultsMessage = document.querySelector(".noResults");
-  totalResult.length === 0
-    ? (noResultsMessage.style.display = "block")
-    : (noResultsMessage.style.display = "none");
+function updateNavigationButtons() {
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === totalPages;
 
-  displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
+  // Scroll the current page button into view on navigation
+  const currentPageButton = pageButtonsContainer.querySelector(
+    `[aria-current="true"]`,
+  );
+  if (currentPageButton) {
+    currentPageButton.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+}
+
+// Event listeners for navigation
+prevBtn.addEventListener("click", () => {
+  if (currentPage > 1) {
+    currentPage--;
+    buildTableRows(currentData, numberOfRowsPerPage);
+  }
 });
 
-// search by date
+nextBtn.addEventListener("click", () => {
+  if (currentPage < totalPages) {
+    currentPage++;
+    buildTableRows(currentData, numberOfRowsPerPage);
+  }
+});
+
+// Event listener for rows per page selection
+selectNumberOfRowsPerPage.addEventListener("change", () => {
+  numberOfRowsPerPage = parseInt(selectNumberOfRowsPerPage.value.trim(), 10);
+  currentPage = 1;
+  buildTableRows(currentData, numberOfRowsPerPage);
+});
+
+// Initialize table
+buildTableRows(currentData, numberOfRowsPerPage);
+//
+
+// Search by text input
+const searchInput = document.getElementById("search-event");
+
+searchInput.addEventListener("keyup", () => {
+  const filter = searchInput.value.trim().toLowerCase();
+  currentData =
+    filter === ""
+      ? [...eventHistoryData]
+      : eventHistoryData.filter((data) =>
+          Object.values(data).some((value) =>
+            value.toString().toLowerCase().includes(filter),
+          ),
+        );
+
+  currentPage = 1;
+  buildTableRows(currentData, numberOfRowsPerPage);
+  toggleNoResultsMessage();
+});
+//
+
+// Search by date input
 const dateInput = document.getElementById("select-date");
 
 dateInput.addEventListener("change", () => {
   const filter = dateInput.value;
-  let totalResult = [];
+  const filteredData = eventHistoryData.filter((data) => data.date === filter);
 
-  console.log(filter);
-  const rows = eventHistoryTable.getElementsByTagName("tr");
+  currentPage = 1;
 
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
-    const dateCell = row.getElementsByTagName("td")[1];
-
-    if (dateCell) {
-      const cellDate = dateCell.textContent || dateCell.innerText;
-
-      if (filter === "") {
-        row.style.display = "";
-        totalResult.push(row);
-      } else if (cellDate === filter) {
-        row.style.display = "";
-        totalResult.push(row);
-      } else {
-        row.style.display = "none";
-      }
-    }
+  if (filter === "") {
+    buildTableRows(currentData, numberOfRowsPerPage);
+  } else {
+    currentData = filteredData;
+    buildTableRows(filteredData, numberOfRowsPerPage);
   }
 
-  const noResultsMessage = document.querySelector(".noResults");
-  totalResult.length === 0
-    ? (noResultsMessage.style.display = "block")
-    : (noResultsMessage.style.display = "none");
+  toggleNoResultsMessage();
 
-  displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
+  displayTotalNumberOfResults.innerText = `Displaying ${filteredData.length} results`;
 });
+//
 
-// Search based of status
+// Filter by status
 const selectStatus = document.getElementById("select-status");
 
 selectStatus.addEventListener("change", () => {
   const filter = selectStatus.value.trim();
-  let totalResult = [];
-  const rows = eventHistoryTable.getElementsByTagName("tr");
+  const filteredData =
+    filter === ""
+      ? eventHistoryData
+      : eventHistoryData.filter((data) => data.status === filter);
 
-  for (let i = 1; i < rows.length; i++) {
-    const row = rows[i];
-    const statusCell = row.getElementsByTagName("td")[3];
+  currentPage = 1;
+  currentData = filteredData;
+  buildTableRows(currentData, numberOfRowsPerPage);
+  toggleNoResultsMessage();
 
-    if (statusCell) {
-      const statusText = statusCell.textContent || statusCell.innerText;
-
-      if (filter === "") {
-        row.style.display = "";
-        totalResult.push(row);
-      } else if (statusText === filter) {
-        row.style.display = "";
-        totalResult.push(row);
-      } else {
-        row.style.display = "none";
-      }
-    }
-  }
-
-  const noResultsMessage = document.querySelector(".noResults");
-  totalResult.length === 0
-    ? (noResultsMessage.style.display = "block")
-    : (noResultsMessage.style.display = "none");
-
-  displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
+  displayTotalNumberOfResults.innerText = `Displaying ${filteredData.length} results`;
 });
 
-// Sort table
+// Sort table by date (most recent, ...)
 const sortOptions = document.getElementById("sort-events");
 
-// Save a copy of the original rows
-const tbody = eventHistoryTable.querySelector("tbody");
-const originalRows = Array.from(tbody.querySelectorAll("tr")).slice(0);
-
+// Sort options event listener
 sortOptions.addEventListener("change", () => {
   const filter = sortOptions.value.trim();
-  let totalResult = [];
-  const rows = Array.from(tbody.querySelectorAll("tr"));
+  let sortedData;
 
-  if (filter === "") {
-    tbody.innerHTML = "";
-    originalRows.forEach((row) => tbody.appendChild(row.cloneNode(true)));
-    totalResult = Array.from(tbody.querySelectorAll("tr"));
+  if (filter === "most recent") {
+    sortedData = [...eventHistoryData].sort(
+      (a, b) => new Date(b.date) - new Date(a.date),
+    );
+  } else if (filter === "oldest first") {
+    sortedData = [...eventHistoryData].sort(
+      (a, b) => new Date(a.date) - new Date(b.date),
+    );
   } else {
-    for (let i = 0; i < rows.length; i++) {
-      const row = rows[i];
-      const dateOfEvent = row.getElementsByTagName("td")[1];
-
-      if (dateOfEvent) {
-        if (filter === "most recent") {
-          row.style.display = "";
-          totalResult.push(row);
-        } else {
-          row.style.display = "none";
-        }
-      }
-    }
-
-    // Sort the results based on date (newest to oldest)
-    totalResult.sort((a, b) => {
-      const dateA = new Date(a.getElementsByTagName("td")[1].textContent);
-      const dateB = new Date(b.getElementsByTagName("td")[1].textContent);
-      return dateB - dateA; // Sort in descending order for most recent
-    });
-
-    tbody.innerHTML = "";
-    totalResult.forEach((row) => tbody.appendChild(row));
+    sortedData = [...eventHistoryData];
   }
 
-  const noResultsMessage = document.querySelector(".noResults");
-  totalResult.length === 0
-    ? (noResultsMessage.style.display = "block")
-    : (noResultsMessage.style.display = "none");
+  currentPage = 1;
+  currentData = sortedData;
+  buildTableRows(currentData, numberOfRowsPerPage);
+  toggleNoResultsMessage();
 
-  displayTotalNumberOfResults.innerText = `Displaying ${totalResult.length} results`;
+  displayTotalNumberOfResults.innerText = `Displaying ${sortedData.length} results`;
 });
 //
+
+// Helper function to toggle no-results message
+function toggleNoResultsMessage() {
+  const noResultsMessage = document.querySelector(".noResults");
+  noResultsMessage.style.display = currentData.length === 0 ? "block" : "none";
+}
 
 // Event detail popover
 const popoverInfoCard = document.getElementById("event-detail-popover");
@@ -281,26 +324,23 @@ const togglePopover = () => {
 
 closePopoverBtn.addEventListener("click", togglePopover);
 
-const rows = eventHistoryTable.getElementsByTagName("tr");
+function attachRowClickEvents() {
+  const rows = eventHistoryTable.getElementsByTagName("tr");
 
-for (let i = 1; i < rows.length; i++) {
-  const row = rows[i];
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
 
-  row.addEventListener("click", () => {
-    const eventName = row.getElementsByTagName("td")[0];
-    const eventDate = row.getElementsByTagName("td")[1];
-    // const speaker = row.getElementsByTagName("td")[2];
-    // const statusCell = row.getElementsByTagName("td")[3];
-    // const eventDescription = row.getElementsByTagName("td")[4];
+    row.addEventListener("click", () => {
+      const eventName = row.getElementsByTagName("td")[0];
+      const eventDate = row.getElementsByTagName("td")[1];
 
-    popoverInfoCard.querySelector(".po-event-name").innerText =
-      eventName.innerText;
-    popoverInfoCard.querySelector(".po-event-date").innerText =
-      eventDate.innerText;
-    // popoverInfoCard.querySelector(".po-event-description").innerText = eventDescription.innerText;
-    // popoverInfoCard.querySelector(".po-event-name").innerText = eventName.innerText;
+      popoverInfoCard.querySelector(".po-event-name").innerText =
+        eventName.innerText;
+      popoverInfoCard.querySelector(".po-event-date").innerText =
+        eventDate.innerText;
 
-    togglePopover();
-  });
+      togglePopover();
+    });
+  }
 }
 //

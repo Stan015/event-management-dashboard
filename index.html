@@ -754,8 +754,7 @@
               <select name="sort-events" id="sort-events">
                 <option value="">Select</option>
                 <option value="most recent">Most Recent</option>
-                <!--                <option value="last modified">Last Modified</option>-->
-                <!--                <option value="date completed">Date Completed</option>-->
+                <option value="oldest first">Oldest First</option>
               </select>
               <svg
                 width="16"
@@ -826,41 +825,7 @@
               <td>Status</td>
             </tr>
           </thead>
-          <tbody>
-            <tr
-              popovertarget="event-detail-popover"
-              popovertargetaction="toggle"
-            >
-              <td>Cloud Innovation Summit</td>
-              <td>2024-10-15</td>
-              <td>Jane Doe</td>
-              <td class="completed">Completed</td>
-            </tr>
-            <tr popovertarget="event-detail-popover">
-              <td>Smart Cities Forum</td>
-              <td>2024-11-29</td>
-              <td>Stanley Azi</td>
-              <td class="in-progress">In Progress</td>
-            </tr>
-            <tr popovertarget="event-detail-popover">
-              <td>Blockchain Revolution Conference</td>
-              <td>2024-03-23</td>
-              <td>Dr. Aisha Malik</td>
-              <td class="completed">Completed</td>
-            </tr>
-            <tr popovertarget="event-detail-popover">
-              <td>Cybersecurity for Startups</td>
-              <td>2024-11-19</td>
-              <td>Emily Zhang</td>
-              <td class="completed">Completed</td>
-            </tr>
-            <tr popovertarget="event-detail-popover">
-              <td>AI in Healthcare Symposium</td>
-              <td>2024-12-02</td>
-              <td>Rachel Moore</td>
-              <td class="in-progress">In Progress</td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
         <div popover id="event-detail-popover">
           <div class="popover-container">
@@ -987,10 +952,11 @@ Event Description</textarea
           <label class="label-row-count">
             Show:
             <span>
-              <select name="row-count" id="row-count">
-                <option>10 rows</option>
-                <option>15 rows</option>
-                <option>20 rows</option>
+              <select class="row-count" id="row-count">
+                <option value="10">10 rows</option>
+                <option value="15">15 rows</option>
+                <option value="20">20 rows</option>
+                <option value="30">30 rows</option>
               </select>
               <svg
                 width="16"
