@@ -543,13 +543,12 @@
           <h2>Event Registrations per month</h2>
           <div
             class="bar-chart-container"
-            aria-label="bar chart of event registrations per month"
           >
-            <canvas id="bar-chart"></canvas>
+            <canvas id="bar-chart" aria-label="bar chart of event registrations per month" role="img"></canvas>
           </div>
         </section>
-        <section class="news-carousel" aria-labelledby="news carousel section">
-          <button aria-labelledby="previous button" class="prev-btn">
+        <section class="news-carousel" aria-label="news carousel section">
+          <button aria-label="previous button" class="prev-btn">
             <svg
               width="12"
               height="12"
@@ -559,23 +558,6 @@
             >
               <path
                 d="M6.625 4.375L4.875 6L6.625 7.625"
-                stroke="#334155"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-          <button aria-labelledby="next button" class="next-btn">
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5.375 4.375L7.125 6L5.375 7.625"
                 stroke="#334155"
                 stroke-width="1.5"
                 stroke-linecap="round"
@@ -629,6 +611,23 @@
               </div>
             </div>
           </div>
+          <button aria-label="next button" class="next-btn">
+            <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                      d="M5.375 4.375L7.125 6L5.375 7.625"
+                      stroke="#334155"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+              />
+            </svg>
+          </button>
           <div class="slide-indicator"></div>
         </section>
       </section>
@@ -724,8 +723,6 @@
             >
               <option>Name</option>
               <option>Name1</option>
-              <option>Name2</option>
-              <option>Name3</option>
             </select>
             <svg
               width="16"
@@ -744,7 +741,7 @@
             </svg>
           </span>
 
-          <p aria-label="number of results" class="number-of-results">
+          <p class="number-of-results">
             Displaying 5 results
           </p>
 
@@ -797,7 +794,7 @@
             </svg>
           </button>
 
-          <button class="export-btn">
+          <button class="export-btn" aria-label="Export table as PDF">
             <svg
               width="16"
               height="16"
