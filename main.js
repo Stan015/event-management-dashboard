@@ -135,10 +135,17 @@ function buildTableRows(
          popovertarget="event-detail-popover"
          popovertargetaction="toggle"
       >
-         <td>${data["event name"]}</td>
-         <td>${data.date}</td>
-         <td>${data.speaker}</td>
-         <td class=${data.status === "Completed" ? "completed" : "in-progress"}>${data.status}</td>
+         <td aria-label="event name">
+           <button class="td-arrow-button" aria-label="Expand details" aria-expanded="false">
+             <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path d="M0.75 0.75L4.25 4L0.75 7.25" stroke="#FCF7FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+             </svg>
+           </button>
+           <span>${data["event name"]}</span>
+         </td>
+         <td aria-label="event date">${data.date}</td>
+         <td aria-label="event speaker">${data.speaker}</td>
+         <td aria-label="event status" class=${data.status === "Completed" ? "completed" : "in-progress"}>${data.status}</td>
       </tr>
     `;
   });
@@ -245,6 +252,7 @@ dateInput.addEventListener("change", () => {
   currentPage = 1;
 
   if (filter === "") {
+    currentData = eventHistoryTableData;
     buildTableRows(currentData, numberOfRowsPerPage);
   } else {
     currentData = filteredData;
